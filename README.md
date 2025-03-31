@@ -1,6 +1,7 @@
 # PMart Frontend
 
 This is the frontend application for PMart, an e-commerce platform that i made to sell my tech services as  freelance. It is built with Next.js and modern React technologies.
+This Project Is served by a Django Backend Server.
 
 ## Tech Stack
 
