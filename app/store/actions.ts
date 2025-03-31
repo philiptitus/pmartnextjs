@@ -36,7 +36,7 @@ import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
 import { RootStateType } from './store';
 // Base URL for API
-const API_URL = 'http://127.0.0.1:8000/store';
+const API_URL = 'https://pmart.pythonanywhere.com/store';
 
 // Interfaces
 interface Product {
