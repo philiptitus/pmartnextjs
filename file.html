@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Template</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #ffffff;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+
+        .header {
+            display: flex;
+            justify-content: center;
+            padding: 40px 0;
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+        }
+
+        .heroSection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 24px;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin: 0;
+            width: 100%;
+        }
+
+        .heroImageContainer {
+            width: 100%;
+            height: 361px;
+        }
+
+        .heroImage {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .description {
+            font-size: 19px;
+            font-weight: 400;
+            line-height: 24px;
+            text-align: center;
+            margin: 0;
+            max-width: 504px;
+        }
+
+        .ctaButton {
+            padding: 13px;
+            border: 1px solid #000000;
+            border-radius: 4px;
+            background-color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.125px;
+            cursor: pointer;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .ctaButton:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-2px);
+        }
+
+        .ctaButton:active {
+            transform: translateY(0);
+        }
+
+        .contentContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            padding: 16px;
+        }
+
+        .section {
+            padding: 16px;
+            width: 100%;
+            background-color: inherit;
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            gap: 16px;
+            width: 100%;
+            min-height: 260px;
+            justify-content: center;
+        }
+
+        .reverse {
+            flex-direction: row-reverse;
+        }
+
+        .imageContainer {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            max-width: 284px;
+        }
+
+        .image {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .textContainer {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 16px 12px;
+            max-width: 284px;
+        }
+
+        .textContent {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .contentTitle {
+            font-weight: 700;
+            font-size: 27px;
+            line-height: 34px;
+            color: #1c1e23;
+            margin: 0;
+        }
+
+        .contentDescription {
+            font-weight: 400;
+            font-size: 19px;
+            line-height: 24px;
+            color: #000000;
+            margin: 0;
+        }
+
+        .footer {
+            width: 100%;
+            min-width: 560px;
+            height: 255px;
+            padding: 16px;
+        }
+
+        .footerContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 17px;
+            height: 250px;
+            max-width: 559px;
+            margin: 0 auto;
+        }
+
+        .info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            height: 180px;
+        }
+
+        .textContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .corporation {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 142.5%;
+            text-align: center;
+            color: #000000;
+            margin: 0;
+        }
+
+        .disclaimer {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 142.5%;
+            text-align: center;
+            color: #000000;
+            max-width: 347px;
+            margin: 0;
+        }
+
+        .socialContainer {
+            display: flex;
+            justify-content: center;
+            gap: 26px;
+            height: 24px;
+        }
+
+        .socialLink {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.2s;
+        }
+
+        .socialLink:hover {
+            opacity: 0.7;
+        }
+
+        .addressContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .address {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 142.5%;
+            text-align: center;
+            color: #000000;
+            margin: 0;
+        }
+
+        .unsubscribe {
+            font-size: 13px;
+            font-weight: 400;
+            line-height: 142.5%;
+            text-align: center;
+            color: #000000;
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+
+        .unsubscribe:hover {
+            opacity: 0.7;
+        }
+
+        .footerLogo {
+            display: flex;
+            justify-content: center;
+        }
+
+        .footerLogoText {
+            font-size: 26.63px;
+            font-weight: 700;
+            color: #000000;
+            margin: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 100%;
+                padding: 0 20px;
+            }
+
+            .content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .reverse {
+                flex-direction: column;
+            }
+
+            .imageContainer,
+            .textContainer {
+                max-width: 100%;
+            }
+
+            .footer {
+                min-width: auto;
+                height: auto;
+            }
+
+            .footerContainer {
+                height: auto;
+            }
+
+            .info {
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header and Hero Section -->
+        <div class="header">
+            <h1 class="logo">LOGO</h1>
+        </div>
+        <div class="heroSection">
+            <h2 class="title">Email Template</h2>
+            <div class="heroImageContainer">
+                <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/hero-cont.png" alt="Hero illustration" class="heroImage">
+            </div>
+            <p class="description">
+                Boost your emails with Blush! Create dope emails easy and fast! Install the Blush plugin to customize all the illustrations!
+            </p>
+            <button class="ctaButton">Try it now!</button>
+        </div>
+
+        <!-- Content Sections -->
+        <div class="contentContainer">
+            <div class="section">
+                <div class="content">
+                    <div class="imageContainer">
+                        <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/image.png" alt="Template preview" class="image">
+                    </div>
+                    <div class="textContainer">
+                        <div class="textContent">
+                            <h2 class="contentTitle">Customize this email template!</h2>
+                            <p class="contentDescription">Boost your emails with Blush! Create dope emails easy and fast!</p>
+                        </div>
+                        <button class="ctaButton">Try it now!</button>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="content reverse">
+                    <div class="imageContainer">
+                        <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/image-2.png" alt="Template preview" class="image">
+                    </div>
+                    <div class="textContainer">
+                        <div class="textContent">
+                            <h2 class="contentTitle">Customize this email template!</h2>
+                            <p class="contentDescription">Boost your emails with Blush! Create dope emails easy and fast!</p>
+                        </div>
+                        <button class="ctaButton">Try it now!</button>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="content">
+                    <div class="imageContainer">
+                        <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/image-3.png" alt="Template preview" class="image">
+                    </div>
+                    <div class="textContainer">
+                        <div class="textContent">
+                            <h2 class="contentTitle">Customize this email template!</h2>
+                            <p class="contentDescription">Boost your emails with Blush! Create dope emails easy and fast!</p>
+                        </div>
+                        <button class="ctaButton">Try it now!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footerContainer">
+                <div class="info">
+                    <div class="textContainer">
+                        <h3 class="corporation">Corporation</h3>
+                        <p class="disclaimer">You are receiving this email because you opted in via our website.</p>
+                    </div>
+                    <div class="socialContainer">
+                        <a href="https://twitter.com" class="socialLink">
+                            <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/href-ht.png" alt="Twitter" width="24" height="24">
+                        </a>
+                        <a href="https://instagram.com" class="socialLink">
+                            <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/href-ht-2.png" alt="Instagram" width="24" height="24">
+                        </a>
+                        <a href="https://youtube.com" class="socialLink">
+                            <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/vector.png" alt="YouTube" width="20" height="16">
+                        </a>
+                        <a href="https://dribbble.com" class="socialLink">
+                            <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/href-ht-3.png" alt="Dribbble" width="24" height="24">
+                        </a>
+                        <a href="https://linkedin.com" class="socialLink">
+                            <img src="https://dashboard.codeparrot.ai/api/image/Z-qoeAz4-w8v6Rue/href-ht-4.png" alt="LinkedIn" width="24" height="24">
+                        </a>
+                    </div>
+                    <div class="addressContainer">
+                        <p class="address">Address, #PC City, State.</p>
+                        <a href="#" class="unsubscribe">Unsubscribe</a>
+                    </div>
+                </div>
+                <div class="footerLogo">
+                    <h2 class="footerLogoText">LOGO</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
