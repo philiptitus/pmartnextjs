@@ -72,16 +72,22 @@ export default function ShopPage() {
   }, [searchQuery]);
 
   useEffect(() => {
-    let result = Array.isArray(productsData) ? [...productsData] : [];
+    // Start with the products from the API
+    let result = [...productsData];
 
-    // Apply search filter
+    // Apply price filter (client-side only)
+    result = result.filter((product) => {
+      const productPrice = parseFloat(product.price);
+      return productPrice >= priceRange[0] && productPrice <= priceRange[1];
+    });
+
+    // Apply other filters
     if (currentSearchQuery) {
       result = result.filter((product) =>
         product.name.toLowerCase().includes(currentSearchQuery.toLowerCase())
       );
     }
 
-    // Apply category filter
     if (selectedCategories.length > 0) {
       result = result.filter((product) => {
         if (typeof product.category === "object" && product.category.id) {
@@ -91,16 +97,13 @@ export default function ShopPage() {
       });
     }
 
-    // Apply price filter
-    result = result.filter((product) => product.price >= priceRange[0] && product.price <= priceRange[1]);
-
     // Apply sorting
     switch (sortOption) {
       case "price-low-high":
-        result.sort((a, b) => a.price - b.price);
+        result.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
         break;
       case "price-high-low":
-        result.sort((a, b) => b.price - a.price);
+        result.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
         break;
       case "newest":
         result.sort((a, b) => (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0));
@@ -115,6 +118,7 @@ export default function ShopPage() {
 
     setFilteredProducts(result);
   }, [productsData, currentSearchQuery, selectedCategories, priceRange, sortOption]);
+
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategories((prev) =>
         prev.includes(categoryId) ? prev.filter((id) => id !== categoryId) : [...prev, categoryId]
@@ -260,16 +264,10 @@ export default function ShopPage() {
                 </div>
               ) : (
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {productsData?.map((product) => (
+                  {filteredProducts.map((product) => (
                     <ProductCard key={product.id} product={product} />
                   ))}
                 </div>
-
-
-
-
-
-
               )}
             </div>
           </div>

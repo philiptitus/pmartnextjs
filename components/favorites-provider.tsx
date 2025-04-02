@@ -1,10 +1,18 @@
 'use client'
 
-import { createContext, useContext, ReactNode, useState, useEffect } from 'react'
+import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+
+interface FavoriteItem {
+  id: string
+  name: string
+  price: number
+  images: any[]
+  color?: string
+}
 
 interface FavoritesContextType {
-  favorites: string[]
-  addFavorite: (id: string) => void
+  favorites: FavoriteItem[]
+  addFavorite: (item: FavoriteItem) => void
   removeFavorite: (id: string) => void
   isFavorite: (id: string) => boolean
 }
@@ -12,9 +20,11 @@ interface FavoritesContextType {
 const FavoritesContext = createContext<FavoritesContextType | undefined>(undefined)
 
 export function FavoritesProvider({ children }: { children: ReactNode }) {
-  const [favorites, setFavorites] = useState<string[]>([])
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([])
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    setMounted(true)
     // Load favorites from localStorage on mount
     const savedFavorites = localStorage.getItem('favorites')
     if (savedFavorites) {
@@ -24,19 +34,30 @@ export function FavoritesProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Save favorites to localStorage whenever they change
-    localStorage.setItem('favorites', JSON.stringify(favorites))
-  }, [favorites])
+    if (mounted) {
+      localStorage.setItem('favorites', JSON.stringify(favorites))
+    }
+  }, [favorites, mounted])
 
-  const addFavorite = (id: string) => {
-    setFavorites(prev => [...prev, id])
+  const addFavorite = (item: FavoriteItem) => {
+    setFavorites(prev => {
+      if (!prev.some(fav => fav.id === item.id)) {
+        return [...prev, item]
+      }
+      return prev
+    })
   }
 
   const removeFavorite = (id: string) => {
-    setFavorites(prev => prev.filter(favId => favId !== id))
+    setFavorites(prev => prev.filter(item => item.id !== id))
   }
 
   const isFavorite = (id: string) => {
-    return favorites.includes(id)
+    return favorites.some(item => item.id === id)
+  }
+
+  if (!mounted) {
+    return null
   }
 
   return (
@@ -59,4 +80,4 @@ export function useFavorites() {
     throw new Error('useFavorites must be used within a FavoritesProvider')
   }
   return context
-} 
+}

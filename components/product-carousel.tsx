@@ -7,7 +7,7 @@ import { fetchFeaturedProducts } from "@/app/store/actions"
 import type { RootStateType, AppDispatch } from "@/app/store/store"
 import { ProductCard } from "@/components/product-card"
 import { Button } from "@/components/ui/button"
-
+import { LoadingSpinner } from "@/components/loading-spinner"
 
 export function ProductCarousel() {
   const dispatch = useDispatch<AppDispatch>()
@@ -75,7 +75,11 @@ export function ProductCarousel() {
   }
 
   if (loading) {
-    return <div>Loading products...</div>
+    return (
+      <div className="flex justify-center p-8">
+        <LoadingSpinner size="lg" />
+      </div>
+    )
   }
 
   // Remove the error return and use fallback data instead

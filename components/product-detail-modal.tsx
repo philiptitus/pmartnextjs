@@ -41,7 +41,13 @@ export function ProductDetailModal({ product, isOpen, onClose }: ProductDetailMo
     if (isFav) {
       removeFavorite(product.id);
     } else {
-      addFavorite(product.id);
+      addFavorite({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        images: product.images,
+        color: product.color,
+      });
     }
   };
 

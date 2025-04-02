@@ -5,6 +5,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { fetchCategories } from "@/app/store/actions"
 import type { RootStateType, AppDispatch } from "@/app/store/store"
+import { LoadingSpinner } from "@/components/loading-spinner"
 
 interface Category {
   id: string | number
@@ -32,9 +33,12 @@ export function CategorySection() {
   }
 
   if (loading) {
-    return <div>Loading categories...</div>
+    return (
+      <div className="flex justify-center p-8">
+        <LoadingSpinner size="lg" />
+      </div>
+    )
   }
-
 
   return (
     <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">

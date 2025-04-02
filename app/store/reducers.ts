@@ -19,14 +19,14 @@ import {
     SUBMIT_ORDER,
     SUBMIT_ORDER_SUCCESS,
     SUBMIT_ORDER_FAILURE,
- FETCH_CATEGORY_BY_SLUG ,
- FETCH_CATEGORY_BY_SLUG_SUCCESS ,
- FETCH_CATEGORY_BY_SLUG_FAILURE ,
-
- FETCH_PRODUCTS_BY_CATEGORY ,
- FETCH_PRODUCTS_BY_CATEGORY_SUCCESS ,
- FETCH_PRODUCTS_BY_CATEGORY_FAILURE,
- RESET_ORDER_STATE,
+    FETCH_CATEGORY_BY_SLUG,
+    FETCH_CATEGORY_BY_SLUG_SUCCESS,
+    FETCH_CATEGORY_BY_SLUG_FAILURE,
+    FETCH_PRODUCTS_BY_CATEGORY,
+    FETCH_PRODUCTS_BY_CATEGORY_SUCCESS,
+    FETCH_PRODUCTS_BY_CATEGORY_FAILURE,
+    RESET_ORDER_STATE,
+    RESET_CONTACT_STATE,
 
 } from './constants'
 
@@ -104,22 +104,6 @@ export const categoryBySlugReducer = (
         return state;
     }
   };
-
-// export const productsReducer = (
-//     state = { products: [], loading: false, error: null },
-//     action: ActionType
-//   ) => {
-//     switch (action.type) {
-//       case FETCH_PRODUCTS:
-//         return { ...state, loading: true, error: null };
-//       case FETCH_PRODUCTS_SUCCESS:
-//         return { loading: false, products: action.payload, error: null };
-//       case FETCH_PRODUCTS_FAILURE:
-//         return { loading: false, products: [], error: action.payload };
-//       default:
-//         return state;
-//     }
-//   };
 
 export const productsReducer = (
     state = { products: [], loading: false, error: null, totalPages: 1 },
@@ -201,6 +185,8 @@ export const contactReducer = (state: SubmissionState = {}, action: ActionType):
             return { loading: false, success: true }
         case SUBMIT_CONTACT_FAILURE:
             return { loading: false, error: action.payload }
+        case RESET_CONTACT_STATE:
+            return { loading: false, success: false, error: null }
         default:
             return state
     }

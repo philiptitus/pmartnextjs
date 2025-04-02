@@ -30,7 +30,8 @@ import {
     FETCH_PRODUCTS_BY_CATEGORY ,
     FETCH_PRODUCTS_BY_CATEGORY_SUCCESS ,
     FETCH_PRODUCTS_BY_CATEGORY_FAILURE,
-    RESET_ORDER_STATE
+    RESET_ORDER_STATE,
+    RESET_CONTACT_STATE,
 } from './constants';
 import axios, { AxiosError } from 'axios';
 import { Dispatch } from 'redux';
@@ -299,3 +300,5 @@ export const searchProducts = (query: string) => async (dispatch: DispatchType):
 export const resetOrderState = () => ({
     type: RESET_ORDER_STATE,
 });
+
+

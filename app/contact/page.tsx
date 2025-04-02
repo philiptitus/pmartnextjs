@@ -3,7 +3,7 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { submitContact } from "@/app/store/actions"
+import { submitContact, resetContactState } from "@/app/store/actions"
 import type { RootState } from "@/app/store/store"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -70,8 +70,8 @@ export default function ContactPage() {
                           email: "",
                           subject: "",
                           message: "",
-                        })
-                        // Reset contact state (you'll need to add this action)
+                        });
+                        dispatch(resetContactState());
                       }} 
                       variant="outline"
                     >
