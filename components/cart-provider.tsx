@@ -25,9 +25,25 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [cartItems, setCartItems] = useState<CartItem[]>([])
   const [mounted, setMounted] = useState(false)
 
+  // Load cart from localStorage on mount
   useEffect(() => {
+    const stored = typeof window !== 'undefined' ? localStorage.getItem('cart') : null;
+    if (stored) {
+      try {
+        setCartItems(JSON.parse(stored))
+      } catch (e) {
+        setCartItems([])
+      }
+    }
     setMounted(true)
   }, [])
+
+  // Save cart to localStorage whenever it changes
+  useEffect(() => {
+    if (mounted) {
+      localStorage.setItem('cart', JSON.stringify(cartItems))
+    }
+  }, [cartItems, mounted])
 
   const addItem = (item: CartItem) => {
     setCartItems((prev) => {
@@ -86,4 +102,4 @@ export function useCart() {
     throw new Error('useCart must be used within a CartProvider')
   }
   return context
-} 
+}
