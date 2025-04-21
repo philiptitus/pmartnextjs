@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { ScrollArea } from '@/components/ui/scroll-area'
 import Link from 'next/link'
+import { PlatformAccountDialog } from "@/components/platform-account-dialog"
 
 const ALLOWED_FILE_TYPES = [
   'application/pdf',
@@ -38,6 +39,8 @@ const { loading, success, error } = orderState;
   const [showSuccessModal, setShowSuccessModal] = useState(false)
   const [attachedFile, setAttachedFile] = useState<File | null>(null)
   const [fileError, setFileError] = useState<string>("")
+  const [showPlatformDialog, setShowPlatformDialog] = useState<"fiverr" | "upwork" | null>(null)
+  const [pendingCheckoutPlatform, setPendingCheckoutPlatform] = useState<"fiverr" | "upwork" | null>(null)
 
   const totalPrice = total || 0
 
@@ -58,11 +61,19 @@ const { loading, success, error } = orderState;
   }
 
   const handleCheckout = async (platform: "fiverr" | "upwork") => {
+    setPendingCheckoutPlatform(platform)
+    setShowPlatformDialog(platform)
+  }
+
+  const proceedWithCheckout = async () => {
+    if (!pendingCheckoutPlatform) return
+    setShowPlatformDialog(null)
+
     if (!email.trim() || !email.includes("@")) {
       return // You might want to show an error message here
     }
 
-    setCheckoutPlatform(platform)
+    setCheckoutPlatform(pendingCheckoutPlatform)
     setIsCheckingOut(true)
 
     const orderDetails = {
@@ -73,10 +84,7 @@ const { loading, success, error } = orderState;
       attachedFile,
     };
 
-    // Simulate checkout process
-    // await new Promise(resolve => setTimeout(resolve, 1500))
-    await dispatch(submitOrder(orderDetails, platform));
-
+    await dispatch(submitOrder(orderDetails, pendingCheckoutPlatform));
   }
 
   useEffect(() => {
@@ -327,7 +335,12 @@ const { loading, success, error } = orderState;
           attachedFile: attachedFile
         }}
       />
+      <PlatformAccountDialog
+        open={!!showPlatformDialog}
+        platform={showPlatformDialog}
+        onClose={() => setShowPlatformDialog(null)}
+        onProceed={proceedWithCheckout}
+      />
     </>
   )
 }
-
