@@ -178,7 +178,7 @@ export default function ContactPage() {
                   <div>
                     <h3 className="font-medium">Website</h3>
                     <p className="text-muted-foreground">
-                      <a href="https://mrphilip.pythonanywhere.com/" target="_blank" rel="noopener noreferrer">mrphilip.pythonanywhere.com</a>
+                      <a href="https://www.mrphilip.cv/" target="_blank" rel="noopener noreferrer">mrphilip.pythonanywhere.com</a>
                     </p>
                   </div>
                 </div>

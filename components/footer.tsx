@@ -40,7 +40,7 @@ export function Footer() {
             </div>
             <p className="text-primary-foreground/80 mb-4 mt-2">Crafting Digital Excellence for all things tech</p>
             <div className="flex space-x-3">
-              <a href="https://mrphilip.pythonanywhere.com/" target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded-md flex items-center text-sm">
+              <a href="https://www.mrphilip.cv/" target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded-md flex items-center text-sm">
                 <span className="mr-2">Website</span>
               </a>
               <a href="https://linkedin.com/in/philiptitus" target="_blank" rel="noopener noreferrer" className="bg-black text-white px-4 py-2 rounded-md flex items-center text-sm">
@@ -103,7 +103,7 @@ export function Footer() {
         <div className="border-t border-primary-foreground/20 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-primary-foreground/80 text-sm mb-4 md:mb-0">© {currentYear} Philip Titus. All rights reserved.</p>
           <div className="flex space-x-4">
-            <Link href="https://mrphilip.pythonanywhere.com/privacy/" className="text-primary-foreground/80 hover:text-primary-foreground text-sm">
+            <Link href="https://www.mrphilip.cv/privacy/" className="text-primary-foreground/80 hover:text-primary-foreground text-sm">
               Privacy Policy
             </Link>
           </div>
